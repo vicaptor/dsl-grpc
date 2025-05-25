@@ -1,0 +1,28 @@
+#- "file://json-to-xml.py"
+grpc:
+	- file: "https://github.com/cameramind/calc/blob/main/Calculation.js"
+	- endpoint: "grpc://localhost:55435/calculation/"
+
+server:
+	- query: "https://github.com/cameramind/calc/blob/main/Calculation.js"
+	- server: "grpc://localhost:55435/calculation/"
+
+server_function:
+  "grpc://localhost:55435/calculation/": "https://github.com/cameramind/calc/blob/main/Calculation.js"
+
+server_content:
+  "http://localhost:8080/calculation.js": "https://github.com/cameramind/calc/blob/main/Calculation.js"
+
+
+services:
+  "grpc://localhost:55435/calculation/": "https://github.com/cameramind/calc/blob/main/Calculation.js"
+  "http://localhost:8080/calculation.js": "https://github.com/cameramind/calc/blob/main/Calculation.js"
+
+pipelines:
+  - schedule: "*/2 * * * *"
+  - query: "mysql://user:pass@localhost:3306/mydb?SELECT ..."
+  - query: "postgresql://user:pass@localhost:5432/analyticsdb?INSERT ..."
+  - query: "POST http://localhost:8080/api/data"
+  - query: "GET http://localhost:8080/api/data"
+  - query: "grpc://localhost:55435/json-to-xml/"
+  - server: "rss://localhost/output.rss"

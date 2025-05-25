@@ -1,0 +1,14 @@
+
+pipeline:
+  name: default-pipeline
+  source:
+    uri: rtsp://camera.example.com/stream
+    protocol: rtsp
+  processing:
+    - type: object_detection
+      model_path: /models/yolov5s.pt
+      confidence: 0.5
+  output:
+    - type: rss
+      uri: http://events.example.com/feed
+      format: xml
